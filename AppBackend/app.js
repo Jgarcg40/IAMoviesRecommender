@@ -13,13 +13,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/*const personName = 'Alice';
-const resultPromise = session.run(
-  'CREATE (a:Person {name: $name}) RETURN a',
-  {name: personName}
-);*/
 
-app.post("/getGames", function(req, res) {
+app.post("/getMovies", function(req, res) {
   var director = req.body.director
   var search = req.body.busqueda;
   var metascore = req.body.metascore;
