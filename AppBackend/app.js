@@ -22,10 +22,10 @@ const resultPromise = session.run(
 app.post("/getMovies", function(req, res) {
   var director = req.body.director;
   var search = req.body.busqueda;
-  var metascore = req.body.Metascore;
+  var metascore = req.body.metascore;
   var limit = req.body.limit;
   var genre = req.body.genre;
-  var modern = req.body.modern;
+  
   var result = [];
   if (genre != "Cualquiera") {
     query = "MATCH(m: Movie) –[* 1] - (: Genre { name: '" + genre + "' })";
@@ -33,7 +33,7 @@ app.post("/getMovies", function(req, res) {
     query = "MATCH (m: Movie)";
   }
   if (director != "Cualquiera") {
-    query = query.concat("WHERE m.Director = '" + director + "'");
+    query = query.concat("WHERE m.director = '" + director + "'");
   }
 
   if (search != "" && director != "Cualquiera") {
@@ -42,14 +42,7 @@ app.post("/getMovies", function(req, res) {
     query = query.concat(" WHERE (m.Title =~ '(?i).*" + search + ".*') ");
   }
 
-  if (modern) {
-    query = query.concat(
-      "RETURN m AS movie ORDER BY m.year DESC, m." +
-        metascore +
-        " DESC LIMIT " +
-        limit
-    );
-  } else {
+  if (metascore) {
     query = query.concat(
       "RETURN m AS movie ORDER BY m." +
         metascore +
