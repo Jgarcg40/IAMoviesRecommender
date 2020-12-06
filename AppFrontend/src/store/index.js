@@ -26,7 +26,7 @@ export default new Vuex.Store({
           method: "POST"
         })
           .then(resp => {
-            const videogames = resp.data.movies;
+            const movies = resp.data.movies;
             commit("update_movies", movies);
             alert(movies);
             resolve(resp);
