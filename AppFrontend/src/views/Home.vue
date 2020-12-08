@@ -88,3 +88,85 @@ b<template>
   </v-app>
       
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: "home",
+      busqueda: "",
+      movies: [],
+      drawer: false,
+      genre: "Cualquiera",
+      director: "Cualquiera",
+      score: "Opiniónes de Usuario",
+      limit: "Top 10",
+      
+     
+      scores: [
+        "Opiniónes de Usuario"
+      ],
+      directors: [
+	"Cualquiera",
+        "David Fincher",
+        "Steven Spielberg",
+	"James Cameron",
+        "Christopher Nolan",
+        "Quentin Tarantino",
+        "Robert Zemeckis",
+        "Peter Jackson",
+	"Frank Darabont",
+        "Lana Wachowski",
+        "Francis Ford Coppola",
+        "Ridley Scott",
+        "Joss Whedon",
+        "George Lucas",
+        "Jonathan Demme",
+        "Martin Scorsese",
+        "Sam Mendes",
+	"Irvin Kershner",
+        "Gore Verbinski",
+        "James McTeigue",
+        "Tony Kaye",
+        "James Gunn",
+        "Luc Besson",
+        "Bryan Singer",
+        "Andrew Stanton",
+        "Mel Gibson"
+      ],
+      genres: [
+        "Cualquiera",
+        "Drama",
+        "Action, Crime, Drama",
+        "Action, Adventure, Sci-Fi",
+        "Crime, Drama",
+        "Drama, Romance",
+        "Adventure, Drama, Fantasy",
+        "Action, Sci-Fi",
+        "Action, Adventure, Drama",
+        "Action, Thriller",
+        "Crime, Drama, Mystery",
+        "Adventure, Drama, Sci-Fi",
+        "Drama, Western",
+        "Action, Adventure, Thriller",
+        "Action, Adventure, Fantasy",
+        "Crime, Drama, Thriller", 
+        "Adventure, Drama, War",
+        "Drama, War", 
+        "Biography, Drama, History",
+        "Drama, Mystery, Sci-Fi",
+        "Mystery, Thriller",
+        "Biography, Comedy, Crime",
+        "Crime, Drama, Fantasy",
+        "Action, Drama, Sci-Fi",
+        "Adventure, Comedy, Sci-Fi",
+        "Action, Adventure, Comedy"
+
+      ],
+      limits: ["Top 1", "Top 5", "Top 10", "Top 20", "Top 30", "Top 50", "Top 100"],
+      historial: []
+    };
+  },
+</script>
+<style>
+</style>
