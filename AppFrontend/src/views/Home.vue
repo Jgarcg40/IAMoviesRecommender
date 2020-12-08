@@ -37,7 +37,7 @@ b<template>
       <v-card color="blue darken-4" height="100px">
         <v-toolbar height="100px" color="green darken-4" dark>
           <v-toolbar-title>
-            Búsqueda por nombre:
+            Búsqueda por Título:
             <v-text-field
               rounded
               outlined
@@ -55,7 +55,36 @@ b<template>
       </v-card>
     </v-content>
 
+    <v-content>
+      <v-container grid-list-md text-xs-center fluid pa-12>
+        <v-layout row wrap fill-height fill-width>
+          <v-flex v-for="(movie, index) in movies" v-bind:key="movie.id">
+            <v-card
+              elevation="18"
+              style="background: #3A1C71;
+    background: blue lighten-1;
+    background: blue lighten-1;"
+            >
+              <v-card-title>{{index + 1}}: {{movie.Title}}</v-card-title>
+              <v-card-subtitle>
+                director: {{movie.director}}
+                <br />
+                Año: {{movie.year.low}}
+		<br />
+                Genero: {{movie.genre}}
+		<br />
+                Nota: {{movie.score}}
+              </v-card-subtitle>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+
    
-</script>
-<style>
-</style>
+
+      <v-divider></v-divider>
+
+  </v-app>
+      
+</template>
