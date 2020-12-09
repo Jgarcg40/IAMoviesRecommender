@@ -167,6 +167,42 @@ export default {
       historial: []
     };
   },
+
+  methods: {
+    send: function() {
+      var params = {
+        director: this.transform(this.director),
+        score: this.transform(this.score),
+        busqueda: this.busqueda,
+        limit: this.transform(this.limit),
+        genre: this.transform(this.genre)
+      };
+      this.historial.push(params);
+
+      this.$http.post("http://localhost:3000/getMovies", params).then(
+        response => {
+          if (
+            response.body &&
+            response.body.length &&
+            response.body[0].message != "Error"
+          ) {
+            this.movies = response.body;
+          } else {
+            response.body = [
+              {
+                Title:
+                  "¡vaya, ninguna película cumple con lo que estás buscando!",
+                year: "--"
+              }
+            ];
+            this.movies = response.body;
+          }
+        },
+        response => {
+          alert("Ha habido un error en el envío: " + response.body);
+        }
+      );
+    },
 </script>
 <style>
 </style>
