@@ -203,6 +203,120 @@ export default {
         }
       );
     },
+    recommend: function() {
+      var fDirector = "";
+      var fScore = "";
+      var fGenre = "";
+      
+
+      var mFDirector = 0;
+      var mFScore = 0;
+      var mFGenre = 0;
+    
+
+      for (var i = 0; i < this.historial.length; i++) {
+        var cDirector = 1;
+        var cScore = 1;
+        var cGenre = 1;
+      
+        for (var j = i; j < this.historial.length; j++) {
+          if (this.historial[i].director == this.historial[j].director) {
+            cDirector++;
+          }
+          if (mFDirector < cDirector) {
+            mFDirector = cDirector;
+            fDirector = this.historial[i].director;
+          }
+
+          if (this.historial[i].score == this.historial[j].score) {
+            cScore++;
+          }
+          if (mFScore < cScore) {
+            mFScore = cScore;
+            fScore = this.historial[i].score;
+          }
+
+          if (this.historial[i].genre == this.historial[j].genre) {
+            cGenre++;
+          }
+          if (mFGenre < cGenre) {
+            mFGenre = cGenre;
+            fGenre = this.historial[i].genre;
+          }
+
+        }
+      }
+
+      if (fDirector == "") {
+        var random = Math.floor(Math.random() * this.directors.length);
+        fDirector = this.transform(this.directors[random]);
+      }
+      if (fScore == "") {
+        var random2 = Math.floor(Math.random() * this.scores.length);
+        fScore = this.transform(this.scores[random2]);
+      }
+      if (fGenre == "") {
+        fGenre = "Cualquiera";
+      }
+      
+
+      var params = {
+        director: fDirector,
+        score: fScore,
+        busqueda: "",
+        limit: this.transform(this.limit),
+        genre: fGenre
+      };
+
+      this.$http.post("http://localhost:3000/getMovies", params).then(
+        response => {
+          if (
+            response.body &&
+            response.body.length &&
+            response.body[0].message != "Error"
+          ) {
+            var random3 = Math.floor(Math.random() * response.body.length);
+            this.movies = [response.body[random3]];
+          } else {
+            response.body = [
+              {
+                Title:
+                  "¡necesito más información para poder darte alguna recomendación, prueba a buscar más películas!",
+                year: "--"
+              }
+            ];
+            this.movies = response.body;
+          }
+        },
+        response => {
+          alert("Ha habido un error en el envío: " + response.body);
+        }
+      );
+    },
+    transform: function(m) {
+
+      if (m == "Opiniónes de Usuario") {
+        return "score";
+      } else if (m == "Top 1") {
+        return 1;
+      } else if (m == "Top 5") {
+        return 5;
+      } else if (m == "Top 10") {
+        return 10;
+      } else if (m == "Top 20") {
+        return 20;
+      } else if (m == "Top 30") {
+        return 30;
+      } else if (m == "Top 50") {
+        return 50;
+	} else if (m == "Top 100") {
+        return 100;
+      } else {
+        return m;
+      }
+    }
+  }
+};
 </script>
 <style>
 </style>
